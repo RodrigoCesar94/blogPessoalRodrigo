@@ -1,0 +1,7 @@
+#img-bg {
+background-image: url(https://image.shutterstock.com/image-vector/3d-illustration-low-poly-bust-600w-2106368753.jpg);
+height: 100vh;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
