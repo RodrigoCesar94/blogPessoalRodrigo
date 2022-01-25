@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto d-flex align-items-center">
       <li class="nav-item active">
-        <img class='rounded-circle img-fluid p-10' width='50px' height='50px'src="https://github.com/RodrigoCesar94.png" alt="Foto de perfil do Usuário">
+        <img class='rounded-circle img-fluid p-10' width='50px' height='50px'src="{{foto}}" alt="Foto de perfil do Usuário">
       </li>
       <li class="nav-item pl-3">
-        <p class='ml-2 text-light fs-16'> | Bem vindo, Rodrigo Cesar Ferreira |</p>
+        <p class='ml-2 text-light fs-16'> | Bem vindo(a), {{nome}} |</p>
       </li>
       <li class="nav-item pl-3">
         <a href="">
@@ -19,7 +19,7 @@
     </ul>
     <ul class="navbar-nav ml-auto d-flex align-items-center">
       <li class="nav-item pl-3">
-        <a href="">
+        <a (click)="sair()">
           <p class='text-light fs-16 font-weight-bold ml-2'> Sair <i class="fa fa-sign-out" aria-hidden="true"></i></p>
         </a>
       </ul>
