@@ -2,11 +2,3 @@ body {
 background: rgb(107,193,204);
 background: linear-gradient(180deg, rgba(107,193,204,1) 13%, rgba(212,75,137,1) 50%, rgba(107,193,204,1) 90%);
 }
-
-.fs-54{
-font-size: 54pt
-}
-
-.fs-18{
-  font-size: 18pt
-}

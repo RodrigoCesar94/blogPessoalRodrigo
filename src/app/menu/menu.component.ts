@@ -18,11 +18,11 @@ export class MenuComponent implements OnInit {
   }
 
 sair(){
-    // this.router.navigate(['/entrar'])
-    // environment.token = ''
-    // environment.id = 0
-    // environment.nome = ''
-    // environment.foto = ''
+this.router.navigate(['/entrar'])
+ environment.token = ''
+ environment.id = 0
+ environment.nome = ''
+ environment.foto = ''
 
   }
 
