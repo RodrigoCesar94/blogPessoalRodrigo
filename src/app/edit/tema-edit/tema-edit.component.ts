@@ -20,7 +20,7 @@ export class TemaEditComponent implements OnInit {
       alert('Sua sessão expirou ! Faça login novamente')
       this.router.navigate(['/entrar'])
   }
-
+  
   let id = this.route.snapshot.params['id']
   this.findByIdTema(id)
 }

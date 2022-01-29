@@ -18,7 +18,7 @@
       </div>
     </div>
   <div class="col-md-6 direita">
-    <a href="https://imgur.com/QhwvXtJ"><img width="500" height="500" src="https://i.imgur.com/QhwvXtJ.gif" title="source: imgur.com" /></a>
+    <a href="https://imgur.com/QhwvXtJ"><img class='img-fluid rounded-circle' width="500" height="500" src="https://i.imgur.com/QhwvXtJ.gif" title="source: imgur.com" /></a>
     <h6 class='text-light'><a href="https://storyset.com/people">People illustrations by Storyset</a></h6>
   </div>
 </div>
@@ -29,18 +29,67 @@
     <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
       <a class="nav-link active" id="nav-todasPostagens-tab" data-toggle="tab" href="#todasPostagens" role="tab" aria-controls="todasPostagens" aria-selected="true">Todas as Postagens</a>
 
-      <a class="nav-link" id="nav-minhasPostagens-tab" data-toggle="tab" href="#minhasPostagens" role="tab" aria-controls="nav-minhasPostagens" aria-selected="false"> Minhas Postagens</a>
+      <a (click)="findByIdUser()" class="nav-link" id="nav-minhasPostagens-tab" data-toggle="tab" href="#minhasPostagens" role="tab" aria-controls="nav-minhasPostagens" aria-selected="false"> Minhas Postagens</a>
 
       <a class="nav-link" id="nav-postagemTema-tab" data-toggle="tab" href="#postagemTema" role="tab" aria-controls="nav-postagemTema" aria-selected="false">Postagens por tema </a>
     </div>
   </nav>
-  <div class="tab-content" id="nav-tabContent">
+  <div class="tab-content mt-5" id="nav-tabContent">
 
-    <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="nav-todasPostagens-tab">Todas as Postagens</div>
+    <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="nav-todasPostagens-tab">
 
-    <div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="nav-minhasPostagens-tab">Minhas Postagens </div>
+      <div class="card-columns">
+        <div class="card text-center" *ngFor='let item of listaPostagens'>
+          <div class="card-body">
+            <img src="{{item.usuario.foto}}" alt="foto do dono da postagem" width="50px" height='50px' class='rounded-circle img-fluid'>
+            <h5 class="card-title">{{item.titulo}}</h5>
+            <small class=text-muted> Tema: {{item.tema.descricao}}</small>
+            <p class="card-text">{{item.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              <span class='mt-3'> Postado em: {{item.data | date: 'dd/MM/yyyy'}} às {{item.data | date: 'HH:mm:ss'}}</span>
+              <span class='mt-3'> por {{item.usuario.nome}}</span>
+            </small></p>
+          </div>
+        </div>
+      </div>
 
-    <div class="tab-pane fade" id="postagemTema" role="tabpanel" aria-labelledby="nav-postagemTema-tab">Postagens por tema</div>
+    </div>
+
+    <div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="nav-minhasPostagens-tab">
+
+      <div class="card-columns">
+        <div class="card text-center" *ngFor='let item of user.postagem'>
+          <div class="card-body">
+            <img src="{{user.foto}}" alt="meudeus" width="50px" height='50px' class='rounded-circle img-fluid'>
+            <h5 class="card-title">{{item.titulo}}</h5>
+            <small class=text-muted> Tema: {{item.tema.descricao}}</small>
+            <p class="card-text">{{item.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              <span class='mt-3'> Postado em: {{item.data | date: 'dd/MM/yyyy'}} às {{item.data | date: 'HH:mm:ss'}}</span>
+            </small></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane fade" id="postagemTema" role="tabpanel" aria-labelledby="nav-postagemTema-tab">
+
+      <div class="card-columns" *ngFor='let tema of listaTemas'>
+        <div class="card text-center" *ngFor='let item of tema.postagem'>
+          <div class="card-body">
+            <img src="{{item.usuario.foto}}" alt="meudeus" width="50px" height='50px' class='rounded-circle img-fluid'>
+            <h5 class="card-title">{{item.titulo}}</h5>
+            <p class="card-text">{{item.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              <span class='mt-3'> Postado em: {{item.data | date: 'dd/MM/yyyy'}} às {{item.data | date: 'HH:mm:ss'}}</span>
+              <span class='mt-3'> por {{item.usuario.nome}}</span>
+            </small></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -59,19 +108,19 @@
 
         <div class="form-group">
           <label for="titulo">Titulo</label>
-          <input type="text" class="form-control" id="titulo" placeholder="digite o titulo da sua postagem">
+          <input [(ngModel)]="postagem.titulo" type="text" class="form-control" id="titulo" placeholder="digite o titulo da sua postagem">
         </div>
 
         <div class="form-group">
           <label for="texto">Texto</label>
-          <textarea  class="form-control" name="texto" id="texto" rows="3"></textarea>
+          <textarea  [(ngModel)]="postagem.texto"class="form-control" name="texto" id="texto" rows="3"></textarea>
         </div>
 
         <div class="form-group">
           <label for="texto">Escolha um tema ou  <a routerLink="/tema" data-dismiss="modal">: cadastre um novo</a></label>
 
-          <select name="tema" id="tema" class="form-control" >
-            <option value="">Temas</option>
+          <select name="tema" id="tema" class="form-control" [(ngModel)]="idTema" (change)="findByIdTema()" >
+            <option *ngFor="let item of listaTemas" value="{{item.id}}">{{item.descricao}}</option>
           </select>
         </div>
 
@@ -79,7 +128,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success">Publicar</button>
+        <button type="button" class="btn btn-success" (click)="publicar()" data-dismiss="modal">Publicar</button>
       </div>
     </div>
   </div>

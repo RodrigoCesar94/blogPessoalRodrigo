@@ -12,9 +12,11 @@ export class TemaService {
   //HttpClient --> disponibiliza os métodos HTTP
   constructor(private http: HttpClient) { }
 
-  token = {
+token = {
 headers: new HttpHeaders().set('Authorization', environment.token)
   }
+
+  
 
   getAllTema(): Observable<Tema[]>{
     return this.http.get<Tema[]>('https://blogpessoalrodrigocesar.herokuapp.com/temas', this.token)
