@@ -21,8 +21,6 @@ export class AuthService {
   headers: new HttpHeaders().set('Authorization', environment.token),
   };
 
-
-
 }
   entrar(userLogin: UserLogin): Observable<UserLogin>{
    return this.http.post<UserLogin>('https://blogpessoalrodrigocesar.herokuapp.com/usuarios/logar', userLogin)
@@ -32,8 +30,12 @@ export class AuthService {
   }
   getByIdUser(id: number): Observable<User>{
   return this.http.get<User>(`https://blogpessoalrodrigocesar.herokuapp.com/usuarios/${id}`, this.token)
-
   }
+
+  atualizar(user: User): Observable<User>{
+    return this.http.put<User>('https://blogpessoalrodrigocesar.herokuapp.com/usuarios/atualizar', user, this.token)
+  }
+
   //se estiver dentr da função, declarar variável  com let.
   logado(){
   let ok: boolean = false;
